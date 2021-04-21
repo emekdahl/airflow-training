@@ -52,3 +52,39 @@
 - the gantt view shows how long tasks are running
 - looking at the overlaps, we can see which tasks are running parallel
 - especially good at IDing bottlenecks
+
+## Graph View
+
+- if you click on a node -> `log` -> to look at logs
+- `instance details` provides more information about the task instance attributes
+- `Rendered` - gives you the output of the data you inject into your task at runtime
+- `Log` - task instance logs
+- `All Instances` - check all task instances across all dag runs
+- `Filter Upstream` - your task plus upstream tasks
+
+### Task Actions
+
+- `Run` - run task instance
+- `Clear` - if a task is in failure, fix the issue, then clear it to RETRY
+- `Mark Failed` - figure out how tasks depending on your current task behave
+- `Mark Success` - ditto
+
+## Commands to Know
+
+- `docker exec -it <container-id> /bin/bash`
+- once inside airflow
+  - `airflow db init` - execute this first, initializes the db and gives you the files and folders you need
+  - `airflow db upgrade` - upgrade the airflow instance
+  - `airflow db reset` - hard reset - use with caution
+- `airflow webserver`
+- `airflow scheduler`
+- `airflow celery worker`
+
+### Interact with DAGS
+
+- `airflow dags pause` or `airflow dags unpause`
+- `airflow dags trigger` - trigger a DAG from the CLI
+  - specify an execution date with the `-e`
+- `airflow dags list`
+- `airflow tasks test example_dag bash_print_date1 2021-01-01` - test task before committing
+- `airflow dags backfill -s 2021-01-01 2021-01-04 --reset_dagruns example_dag` - rerun past DAG runs
