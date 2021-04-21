@@ -41,7 +41,7 @@
 
     - airflow workers are in a separate node
 
-    ![multi-node arch](img/multi-node-arch.png)
+    ![multi-node arch](../img/multi-node-arch.png)
 
 ## Core Concepts
 
@@ -68,4 +68,4 @@
     - the edges in the DAG
     - set_upstream OR set_downstream but use the >> or the << the bit shift operators to note directionality
   - workflow
-    ![workflow](img/workflow.png)
+    ![workflow](../img/workflow.png)
