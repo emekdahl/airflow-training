@@ -4,6 +4,7 @@
 
 - do we have multiple node arch? what do we use to queue tasks?
 - do we have multiple schedulers?
+- do we have default waiting periods for webserver and scheduler?
 
 ## What is Airflow?
 
@@ -69,3 +70,30 @@
     - set_upstream OR set_downstream but use the >> or the << the bit shift operators to note directionality
   - workflow
     ![workflow](../img/workflow.png)
+
+## Task Lifecycle
+
+![node](../img/node.png)
+
+- web server parses DAGs every 30 seconds by default
+- schedule parses for new DAGs every 5 minutes by default
+- usually there's a dags folder
+  - add specific dags to this folder
+- task instance lifecycle
+  - once ready to be parsed, there is a dag run is created
+  - task instance object is created with the status scheduled
+  - once sent to the executor it has the status queued
+  - when running, status is updated
+  - once complete, modified again with success or failure
+
+## Extras and Providers
+
+- Extras
+  - a big package installing all dependencies (for example, the celery dependencies)
+  - in the case of celery, the core airflow is extended
+- Providers
+  - allows you to add functionality to airflow
+  - for example, postgres is not a default in the core install, so you have to install postgres provider
+- What is the difference?
+  - extras have an associated set of dependencies
+    - for example, k8s
