@@ -29,3 +29,20 @@
   - trigger manually (needs toggle on)
   - delete the dag - it doesn't delete the file, only the metadata
 - links to other views
+
+## Tree View
+
+- squares - DAG runs
+- circles - tasks
+- dark green - success
+- light green - running
+- red - failure
+
+## Graph View
+
+- check the dependencies
+- get the status of the latest dag run
+- hover over the tasks to get information
+- hover over one task and the blue outlines show the relationships between the tasks
+- the background of the tasks corresponds to the type of task, so look at the legend in the top right
+- auto-refresh toggle on to automatically update the view as your pipeline progresses
