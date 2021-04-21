@@ -46,3 +46,9 @@
 - hover over one task and the blue outlines show the relationships between the tasks
 - the background of the tasks corresponds to the type of task, so look at the legend in the top right
 - auto-refresh toggle on to automatically update the view as your pipeline progresses
+
+## Gantt View
+
+- the gantt view shows how long tasks are running
+- looking at the overlaps, we can see which tasks are running parallel
+- especially good at IDing bottlenecks
