@@ -1,5 +1,9 @@
 # Interacting with Apache Airflow
 
+## Questions:
+
+- are we using the Airflow REST API?
+
 ## 3 ways to Interact
 
 - UI
@@ -88,3 +92,9 @@
 - `airflow dags list`
 - `airflow tasks test example_dag bash_print_date1 2021-01-01` - test task before committing
 - `airflow dags backfill -s 2021-01-01 2021-01-04 --reset_dagruns example_dag` - rerun past DAG runs
+
+## Stable REST API
+
+- in airflow 1.x the rest API is not stable and shouldn't be used in production
+- CRUD operations
+-
