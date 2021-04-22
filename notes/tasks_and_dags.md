@@ -47,3 +47,7 @@
 - check out the base operator meta in the airflow docs
 
 ## Executing Python Functions
+
+- kwargs - you can get a lot of info by printing kwargs out
+- ds - date
+- you can pass your own params: `op_kwargs={'my_param': 42}`

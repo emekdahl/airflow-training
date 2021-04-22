@@ -10,8 +10,8 @@ default_args = {
 }
 
 
-def _downloading_data():
-    print('hello world')
+def _downloading_data(**kwargs):
+    print(kwargs)
 
 
 with DAG(dag_id='simple_dag', default_args=default_args, start_date=datetime(2021, 1, 1), catchup=False, schedule_interval=timedelta(hours=1), max_active_runs=1) as dag:
@@ -23,5 +23,4 @@ with DAG(dag_id='simple_dag', default_args=default_args, start_date=datetime(202
     downloading_data = PythonOperator(
         task_id='downloading_data',
         python_callable=_downloading_data
-
     )
