@@ -16,4 +16,6 @@
 
 - do NOT have one start date at the dag level and another at the operator level
 - datetime is in UTC by default - this is a BEST PRACTICE
--
+- you can define start dates in the future
+- you can also define start dates in the past - airflow with run all the non-triggered dag runs between the scheduled date and the current date
+- DO NOT define the start date dynamically (datetime.now())
