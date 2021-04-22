@@ -19,3 +19,12 @@
 - you can define start dates in the future
 - you can also define start dates in the past - airflow with run all the non-triggered dag runs between the scheduled date and the current date
 - DO NOT define the start date dynamically (datetime.now())
+
+## Schedule interval
+
+- use crontab.guru
+- @daily
+- @weekly
+- @hourly
+- timedelta(days=1) - superior to cron for things like "every 3 days" which can fall apart between end of feb and beginning of march
+- None - dag will NEVER be automatically triggered by the scheduler - for manual or external trigger

@@ -1,9 +1,9 @@
 from airflow import DAG
 from airflow.operators.dummy import DummyOperator
 
-from datetime import datetime
+from datetime import datetime, timedelta
 
-with DAG(dag_id='simple_dag', start_date=datetime(2021, 1, 1)) as dag:
+with DAG(dag_id='simple_dag', start_date=datetime(2021, 1, 1), schedule_interval=timedelta(hours=1)) as dag:
 
     task_1 = DummyOperator(
         task_id='task_1'
