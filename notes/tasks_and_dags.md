@@ -28,3 +28,22 @@
 - @hourly
 - timedelta(days=1) - superior to cron for things like "every 3 days" which can fall apart between end of feb and beginning of march
 - None - dag will NEVER be automatically triggered by the scheduler - for manual or external trigger
+
+## Backfilling and Catchup
+
+- catchup=True - if we miss a DAG run, the DAG will attempt to run all prior missed DAGs when it skips
+  - what happens when the start date is set in the past? if we set catchup parameter to false
+- max_active_runs=1 - only one DAG can run at a time
+
+## Focus on Operators
+
+- if you put extracting and cleaning data on the same operator, then you will have to retry both tasks even if only one failed
+- ONE OPERATOR, ONE TASK
+- OPERATORS SHOULD BE IDEMPOTENT
+- retry=5 - retry 5x
+- retry_delay=timedelta(minutes=5)
+- avoid repeating yourself by defining dictionary of default args
+- if you specify parameters inside the class, those override the default_args
+- check out the base operator meta in the airflow docs
+
+## Executing Python Functions
