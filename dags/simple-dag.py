@@ -16,10 +16,12 @@ default_args = {
 def _downloading_data(**kwargs):
     with open('/tmp/my_file.txt', 'w') as f:
         f.write('my_data')
+    return 42
 
 
-def _checking_data():
-    print('check data')
+def _checking_data(ti):
+    my_xcom = ti.xcom_pull('return_value', task_ids=['downloading_data'])
+    print(my_xcom)
 
 
 with DAG(dag_id='simple_dag', default_args=default_args, start_date=datetime(2021, 1, 1), catchup=False, schedule_interval=timedelta(hours=1), max_active_runs=1) as dag:
@@ -41,7 +43,7 @@ with DAG(dag_id='simple_dag', default_args=default_args, start_date=datetime(202
     waiting_for_data = FileSensor(
         task_id='waiting_for_data',
         fs_conn_id='fs-default',
-        filepath='my_file.txt'
+        filepath='my_file.txt',
     )
 
     processing_data = BashOperator(
@@ -49,5 +51,4 @@ with DAG(dag_id='simple_dag', default_args=default_args, start_date=datetime(202
         bash_command='exit 0'
     )
 
-    chain(downloading_data, waiting_for_data, processing_data)
-    # cross_downstream([downloading_data, checking_data],[waiting_for_data, processing_data])
+    chain(downloading_data, checking_data, waiting_for_data, processing_data)

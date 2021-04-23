@@ -74,3 +74,8 @@
   - <<
 - chain() - list all tasks in order with commas
 - cross_downstream() - the dependencies criss-cross in the DAG
+
+## Exchanging Data
+
+- xcomms allows you to exchange a small about of data between tasks
+-
