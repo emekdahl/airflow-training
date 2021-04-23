@@ -51,3 +51,26 @@
 - kwargs - you can get a lot of info by printing kwargs out
 - ds - date
 - you can pass your own params: `op_kwargs={'my_param': 42}`
+
+## Sensors
+
+- if you need to wait for something, say for a file to land, this is what you use to do it
+- if you don't see your tool in admin -> add connection, you need to install the provider and then you can get the connection
+- by default, the `extra` and `password` fields are encrypted
+  - fernet key is used to encrypt data
+- `poke_interval` determines the frequency at which the sensor checks
+
+## Bash Operator
+
+- easy to import and use
+
+## Define the path
+
+- set upstream - after.set_upstream(before)
+- set downstream - before.set_downstream(after)
+- bitshift operators - much easier!
+  - first task >> second task >> third task
+  - > >
+  - <<
+- chain() - list all tasks in order with commas
+- cross_downstream() - the dependencies criss-cross in the DAG
