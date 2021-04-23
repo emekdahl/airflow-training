@@ -9,7 +9,10 @@ from datetime import datetime, timedelta
 
 default_args = {
     'retry': 5,
-    'retry_delay': timedelta(minutes=5)
+    'retry_delay': timedelta(minutes=5),
+    'email_on_failure': True,
+    'email_on_retro': True,
+    'email': 'admin@astro.io'
 }
 
 
@@ -24,7 +27,11 @@ def _checking_data(ti):
     print(my_xcom)
 
 
-with DAG(dag_id='simple_dag', default_args=default_args, start_date=datetime(2021, 1, 1), catchup=False, schedule_interval=timedelta(hours=1), max_active_runs=1) as dag:
+def _failure(context):
+    print("on callback failure", context)
+
+
+with DAG(dag_id='simple_dag', default_args=default_args, start_date=datetime(2021, 1, 1), catchup=True, schedule_interval=timedelta(hours=1), max_active_runs=1) as dag:
 
     downloading_data = PythonOperator(
         task_id='downloading_data',
@@ -44,7 +51,8 @@ with DAG(dag_id='simple_dag', default_args=default_args, start_date=datetime(202
 
     processing_data = BashOperator(
         task_id='processing_data',
-        bash_command='exit 0'
+        bash_command='exit 1',
+        on_failure_callback=_failure
     )
 
     chain(downloading_data, checking_data, waiting_for_data, processing_data)

@@ -86,3 +86,8 @@
   - SQL - 64 KB
 - do NOT process data using xcoms not the least because of size limitations
 - use them to share states and small amounts of data
+
+## Handling errors
+
+- The easiest way to retry multiple tasks is to use Task Instances > the search to filter for dag_id and status then "clear"
+- configure email on failure, email on retry, and callback `on_failure_callback=_failure`
