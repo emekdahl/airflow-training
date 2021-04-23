@@ -77,5 +77,12 @@
 
 ## Exchanging Data
 
-- xcomms allows you to exchange a small about of data between tasks
--
+- xcoms allows you to exchange a small about of data between tasks
+- ti.xcom_pull()
+- ti.xcom_push()
+- xcom is stored into database of airflow, so there is a size limitation -
+  - sqlite - 2 GB in one xcom
+  - postgres - 1 GB
+  - SQL - 64 KB
+- do NOT process data using xcoms not the least because of size limitations
+- use them to share states and small amounts of data

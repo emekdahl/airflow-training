@@ -13,22 +13,18 @@ default_args = {
 }
 
 
-def _downloading_data(**kwargs):
+def _downloading_data(ti, **kwargs):
     with open('/tmp/my_file.txt', 'w') as f:
         f.write('my_data')
-    return 42
+    ti.xcom_push(key='my_key', value=43)
 
 
 def _checking_data(ti):
-    my_xcom = ti.xcom_pull('return_value', task_ids=['downloading_data'])
+    my_xcom = ti.xcom_pull(key='my_key', task_ids=['downloading_data'])
     print(my_xcom)
 
 
 with DAG(dag_id='simple_dag', default_args=default_args, start_date=datetime(2021, 1, 1), catchup=False, schedule_interval=timedelta(hours=1), max_active_runs=1) as dag:
-
-    # task_1 = DummyOperator(
-    #     task_id='task_1'
-    # )
 
     downloading_data = PythonOperator(
         task_id='downloading_data',
